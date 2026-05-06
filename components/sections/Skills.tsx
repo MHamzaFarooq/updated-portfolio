@@ -10,7 +10,7 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2, // Delay between each card's animation
+      staggerChildren: 0.3, // Delay between each card's animation
     },
   },
 };
@@ -22,7 +22,7 @@ function Skills() {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: 0.6 }}
         className="max-w-7xl mx-auto w-full flex flex-col gap-10"
       >
         <Heading primary="How I" secondary="help" />

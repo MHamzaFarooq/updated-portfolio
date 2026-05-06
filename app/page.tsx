@@ -1,3 +1,4 @@
+import About from "@/components/sections/About";
 import Hero from "@/components/sections/Hero";
 import Navbar from "@/components/sections/Navbar";
 import Projects from "@/components/sections/Projects";
@@ -10,6 +11,7 @@ export default function Home() {
       <Hero />
       <Skills />
       <Projects />
+      <About />
     </>
   );
 }
