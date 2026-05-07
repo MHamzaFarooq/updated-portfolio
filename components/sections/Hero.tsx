@@ -34,10 +34,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <div
-      className="flex flex-col items-center justify-center gap-14"
-      style={{ height: `calc(100vh - 100px)` }}
-    >
+    <div className="flex flex-col items-center justify-center gap-14 h-screen">
       <div
         ref={headingRef}
         className="flex flex-col items-center justify-center text-center"

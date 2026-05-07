@@ -3,12 +3,31 @@ import Heading from "../ui/Heading";
 import { motion } from "framer-motion";
 import { useState, useRef } from "react";
 import Image from "next/image";
-
 const projects = [
-  { id: "01", name: "VoiceDrop.ai", image: "/images/voicedrop.png" },
-  { id: "02", name: "1Capture.io", image: "/images/1capture.png" },
-  { id: "03", name: "1Lookup.io", image: "/images/1lookup.png" },
-  { id: "04", name: "Syncode", image: "/images/syncode.png" },
+  {
+    id: "01",
+    name: "VoiceDrop.ai",
+    image: "/images/voicedrop.png",
+    link: "https://voicedrop.ai",
+  },
+  {
+    id: "02",
+    name: "1Capture.io",
+    image: "/images/1capture.png",
+    link: "https://1capture.io",
+  },
+  {
+    id: "03",
+    name: "1Lookup.io",
+    image: "/images/1lookup.png",
+    link: "https://1lookup.io",
+  },
+  {
+    id: "04",
+    name: "Syncode",
+    image: "/images/syncode.png",
+    link: "https://github.com/MHamzaFarooq/Syncode",
+  },
 ];
 
 const projectVariants = {
@@ -47,7 +66,7 @@ export default function Projects() {
   return (
     <div
       ref={containerRef}
-      className="relative min-h-screen py-16"
+      className="relative min-h-screen py-16 "
       onMouseMove={handleMouseMove}
     >
       {/* Floating preview — always mounted, fades between images */}
