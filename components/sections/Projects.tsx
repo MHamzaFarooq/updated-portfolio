@@ -66,7 +66,7 @@ export default function Projects() {
   return (
     <div
       ref={containerRef}
-      className="relative min-h-screen py-16 "
+      className="relative min-h-screen flex flex-col justify-center py-20"
       onMouseMove={handleMouseMove}
     >
       {/* Floating preview — always mounted, fades between images */}

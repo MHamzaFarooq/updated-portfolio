@@ -2,11 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import Button from "../ui/Button";
+import HeroTitle from "../ui/HeroTitle";
 
-export default function Hero() {
+function UpdatedHero() {
   const headingRef = useRef<HTMLDivElement>(null);
-  const actionsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -20,73 +19,51 @@ export default function Hero() {
         stagger: 0.2,
         delay: 0.1,
       });
-
-      gsap.from(actionsRef.current, {
-        y: 20,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        delay: 0.5,
-      });
     }, headingRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-14 h-screen">
+    <div className="h-screen flex items-center justify-center">
       <div
         ref={headingRef}
         className="flex flex-col items-center justify-center text-center"
       >
-        {/* row 1 */}
+        {/* Row 1 */}
         <div className="overflow-hidden">
-          <div className="row-inner flex items-baseline">
-            <span className="font-retail text-[121.85px] tracking-[-0.08em] leading-[117%]">
+          <div className="row-inner flex gap-x-6 items-baseline justify-center">
+            <HeroTitle fontName="retail" tracking={true}>
               Hamza
-            </span>
-            <span className="font-swear text-[121.85px] leading-[117%]">
-              &nbsp;is a
-            </span>
+            </HeroTitle>
+            <HeroTitle fontName="swear">is</HeroTitle>
+            <HeroTitle fontName="swear">a</HeroTitle>
           </div>
         </div>
 
-        {/* row 2 */}
+        {/* Row 2 */}
         <div className="overflow-hidden">
-          <div className="row-inner flex items-baseline">
-            <span className="font-swear text-[121.85px] leading-[117%]">
-              product&nbsp;
-            </span>
-            <span className="font-retail text-[121.85px] tracking-[-0.08em] leading-[117%] font-normal">
+          <div className="row-inner flex gap-x-6 items-baseline justify-center">
+            <HeroTitle fontName="swear">product</HeroTitle>
+            <HeroTitle fontName="retail" tracking={true}>
               designer
-            </span>
-            <span className="font-swear text-[121.85px] leading-[117%]">
-              &nbsp;turned
-            </span>
+            </HeroTitle>
+            <HeroTitle fontName="swear">turned</HeroTitle>
           </div>
         </div>
 
-        {/* row 3 */}
+        {/* Row 3 */}
         <div className="overflow-hidden">
-          <div className="row-inner flex items-baseline">
-            <span className="font-swear text-[121.85px] leading-[117%]">
-              software&nbsp;
-            </span>
-            <span className="font-retail text-[121.85px] tracking-[-0.08em] leading-[117%] font-normal">
+          <div className="row-inner flex gap-x-6 items-baseline justify-center">
+            <HeroTitle fontName="swear">software</HeroTitle>
+            <HeroTitle fontName="retail" tracking={true}>
               engineer
-            </span>
+            </HeroTitle>
           </div>
         </div>
-      </div>
-
-      <div
-        ref={actionsRef}
-        className="flex w-md items-center whitespace-nowrap text-[16px] font-retail"
-      >
-        <Button variant="filled">See my work</Button>
-        <div className="w-full h-px bg-black"></div>
-        <Button variant="outline">Talk to me</Button>
       </div>
     </div>
   );
 }
+
+export default UpdatedHero;

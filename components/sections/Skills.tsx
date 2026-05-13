@@ -23,7 +23,7 @@ function Skills() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.6 }}
-        className="max-w-7xl mx-auto w-full flex flex-col gap-10"
+        className="max-w-7xl mx-auto flex flex-col gap-10"
       >
         <Heading primary="How I" secondary="help" />
 
