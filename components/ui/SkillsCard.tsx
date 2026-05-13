@@ -12,8 +12,8 @@ const cardVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 1.2, // Reduced from 2s for a snappier feel
-      ease: [0.22, 1, 0.36, 1],
+      duration: 1.2,
+      ease: [0.22, 1, 0.36, 1] as const,
     },
   },
 };

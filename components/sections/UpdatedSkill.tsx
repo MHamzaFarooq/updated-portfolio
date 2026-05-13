@@ -18,7 +18,7 @@ function UpdatedSkill() {
           help
         </UpdatedHeading>
       </div>
-      <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex flex-col md:flex-row md: max-w-280 gap-4">
         {services.map((service) => (
           <SkillsCard key={service.id} {...service} />
         ))}

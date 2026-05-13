@@ -2,7 +2,7 @@ import HeroTitle from "../ui/HeroTitle";
 
 function UpdatedHero() {
   return (
-    <div className="h-screen flex items-center">
+    <div className="h-screen flex items-center overflow-x-hidden">
       <section className="flex flex-wrap gap-x-6 px-4 justify-center text-center mx-auto items-center max-w-99.5 sm:max-w-172.5 md:max-w-280">
         <div className="flex gap-x-6">
           <HeroTitle fontName="retail" tracking={true} delay={0.1}>
