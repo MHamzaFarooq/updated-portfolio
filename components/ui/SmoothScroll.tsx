@@ -1,4 +1,3 @@
-// components/SmoothScroll.jsx
 "use client";
 
 import { useEffect } from "react";
@@ -17,7 +16,7 @@ export default function SmoothScroll({
       smoothWheel: true,
     });
 
-    function raf(time) {
+    function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
