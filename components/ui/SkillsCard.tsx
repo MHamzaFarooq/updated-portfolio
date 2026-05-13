@@ -2,22 +2,6 @@
 import { motion } from "framer-motion";
 import Tag from "./Tag";
 
-// 1. Define variants for the individual card
-const cardVariants = {
-  hidden: {
-    opacity: 0,
-    y: 40,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 1.2,
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
-  },
-};
-
 function SkillsCard({
   id,
   title,
@@ -30,10 +14,7 @@ function SkillsCard({
   tags: string[];
 }) {
   return (
-    <motion.div
-      variants={cardVariants} // 2. Assign the variants here
-      className="p-8 bg-white rounded-3xl w-full"
-    >
+    <div className="p-8 bg-white rounded-3xl w-full">
       <div className="font-swear text-right text-[111px] tracking-[-4%] leading-[97%]">
         {id}
       </div>
@@ -48,7 +29,7 @@ function SkillsCard({
           <Tag key={tag}>{tag}</Tag>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 }
 

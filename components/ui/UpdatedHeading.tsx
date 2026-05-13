@@ -24,7 +24,7 @@ function UpdatedHeading({
           delay: delay * 1.2,
           ease: [0.16, 1, 0.3, 1],
         }}
-        className={`${pr} font-${fontName} text-[77px] ${tracking ? "tracking-[-0.08em]" : ""} leading-[117%] sm:text-[87px]`}
+        className={`${pr} font-${fontName} text-[67px] ${tracking ? "tracking-[-0.08em]" : ""} leading-[117%] sm:text-[87px]`}
       >
         {children}
       </motion.h1>
