@@ -1,5 +1,6 @@
 "use client";
 import Tag from "./Tag";
+import { motion } from "framer-motion";
 
 function SkillsCard({
   id,
@@ -13,7 +14,16 @@ function SkillsCard({
   tags: string[];
 }) {
   return (
-    <div className="p-8 bg-white rounded-3xl w-full">
+    <motion.div
+      initial={{ opacity: 0, y: 100 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 1.75,
+        delay: Number(id) * 0.1,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      className="p-8 bg-white rounded-3xl w-full"
+    >
       <div className="font-swear text-right text-[111px] tracking-[-4%] leading-[97%]">
         {id}
       </div>
@@ -28,7 +38,7 @@ function SkillsCard({
           <Tag key={tag}>{tag}</Tag>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
