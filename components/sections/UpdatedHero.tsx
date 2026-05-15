@@ -1,3 +1,4 @@
+import Button from "../ui/Button";
 import HeroTitle from "../ui/HeroTitle";
 
 function UpdatedHero() {
@@ -36,7 +37,7 @@ function UpdatedHero() {
     //     </div>
     //   </section>
     // </div>
-    <div className="h-screen flex items-center">
+    <div className="h-full flex flex-col items-center justify-center gap-9 p-4 lg:h-screen lg:px-0">
       <section className="flex flex-wrap gap-x-6 justify-center text-center mx-auto items-center max-w-99.5 sm:max-w-172.5 md:max-w-280">
         <HeroTitle fontName="retail" tracking={true} delay={0.1}>
           Hamza
@@ -63,6 +64,11 @@ function UpdatedHero() {
           engineer
         </HeroTitle>
       </section>
+      <div className="flex flex-col w-full gap-3 sm:flex-row sm:items-center sm:max-w-90">
+        <Button variant="filled">See My Work</Button>
+        <div className="hidden h-px bg-black sm:block sm:w-full"></div>
+        <Button variant="outline">Talk to Me</Button>
+      </div>
     </div>
   );
 }
