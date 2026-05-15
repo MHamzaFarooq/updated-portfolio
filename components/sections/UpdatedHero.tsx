@@ -1,5 +1,7 @@
+"use client";
 import Button from "../ui/Button";
 import HeroTitle from "../ui/HeroTitle";
+import { motion } from "framer-motion";
 
 function UpdatedHero() {
   return (
@@ -64,9 +66,15 @@ function UpdatedHero() {
           engineer
         </HeroTitle>
       </section>
-      <div className="flex flex-col w-full gap-3 sm:flex-row sm:items-center sm:max-w-90">
+      <div className="flex flex-col w-full gap-3 sm:flex-row sm:items-center sm:max-w-90 sm:gap-0">
         <Button variant="filled">See My Work</Button>
-        <div className="hidden h-px bg-black sm:block sm:w-full"></div>
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1.35, delay: 1.75, ease: [0.16, 1, 0.3, 1] }}
+          style={{ transformOrigin: "center" }}
+          className="hidden h-px bg-black sm:block sm:w-full"
+        />
         <Button variant="outline">Talk to Me</Button>
       </div>
     </div>
