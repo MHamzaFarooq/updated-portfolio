@@ -1,6 +1,6 @@
 "use client";
-import React, { useLayoutEffect, useState } from "react";
 import { motion } from "framer-motion";
+import useMobile from "../hooks/useMobile";
 
 export default function Button({
   children,
@@ -15,16 +15,7 @@ export default function Button({
 
   const variantClasses = variant === "filled" ? filledClasses : outlineClasses;
 
-  const [isMobile, setIsMobile] = useState<boolean | null>(null);
-
-  useLayoutEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 640);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-
-  if (isMobile === null) return null;
+  const isMobile = useMobile();
 
   return (
     <motion.div

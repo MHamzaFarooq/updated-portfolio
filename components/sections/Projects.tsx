@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState, useRef, useLayoutEffect } from "react";
 import Image from "next/image";
 import UpdatedHeading from "../ui/UpdatedHeading";
+import useMobile from "../hooks/useMobile";
 const projects = [
   {
     id: "01",
@@ -36,7 +37,7 @@ const projectVariants = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, delay: i * 0.2 },
+    transition: { duration: 0.5, delay: i * 0.1 },
   }),
 };
 
@@ -46,16 +47,8 @@ export default function Projects() {
   const [prevImage, setPrevImage] = useState<string | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
-  useLayoutEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 640);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-
-  if (isMobile === null) return null;
+  const isMobile = useMobile();
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = containerRef.current!.getBoundingClientRect();
@@ -81,7 +74,7 @@ export default function Projects() {
   return (
     <div
       ref={containerRef}
-      className="relative min-h-screen flex flex-col justify-center py-20 gap-10"
+      className="relative min-h-screen flex px-4 flex-col justify-center py-20 gap-10"
       onMouseMove={handleMouseMove}
     >
       {/* Floating preview — always mounted, fades between images */}
@@ -172,7 +165,7 @@ export default function Projects() {
           variants={projectVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.6 }}
+          viewport={{ once: true, amount: 0.3 }}
           custom={i}
           key={project.id}
           className="h-40.75 flex items-center border-b"
