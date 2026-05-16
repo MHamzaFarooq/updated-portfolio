@@ -2,7 +2,11 @@
 import UpdatedHeading from "../ui/UpdatedHeading";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Button from "../ui/Button";
 function About() {
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <div className="h-full p-4 py-34.75">
       <div className="flex flex-col flex-reverse sm:flex-row justify-center items-center gap-16">
@@ -35,23 +39,28 @@ function About() {
               me
             </UpdatedHeading>
           </div>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{
-              duration: 0.6,
-              ease: "easeOut" as const,
-              delay: 0.3,
-            }}
-            className="font-retail text-[16px]"
-          >
-            My name is Hamza Farooq. I am a designer turned coder, builder, and
-            developer with 2+ years of professional experience in product design
-            and full-stack development. In my free time, I like to try out
-            different restaurants, spend time with family and friends, and I am
-            a #1 fan of chai. In simple terms, I am easy to work with.
-          </motion.p>
+          <div className="flex flex-col gap-4">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{
+                duration: 0.6,
+                ease: "easeOut" as const,
+                delay: 0.3,
+              }}
+              className="font-retail text-[16px]"
+            >
+              My name is Hamza Farooq. I am a designer turned coder, builder,
+              and developer with 2+ years of professional experience in product
+              design and full-stack development. In my free time, I like to try
+              out different restaurants, spend time with family and friends, and
+              I am a #1 fan of chai. In simple terms, I am easy to work with.
+            </motion.p>
+            <a href="/CV/hamza_general_CV.pdf" download className="w-fit">
+              <Button variant="outline">Download my CV</Button>
+            </a>
+          </div>
         </div>
       </div>
     </div>

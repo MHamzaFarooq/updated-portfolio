@@ -120,7 +120,7 @@ export default function Projects() {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col justify-center py-20">
+    <div className="relative min-h-screen flex flex-col justify-center pt-20">
       {isMobile === false && (
         <>
           {/* Modal image container */}
