@@ -89,6 +89,7 @@ export default function Projects() {
       {/* Floating preview */}
       <motion.div
         className="fixed z-50 pointer-events-none rounded-xl overflow-hidden shadow-2xl"
+        initial={{ opacity: 0, scale: 0.88 }} // ✅ start hidden
         animate={{
           opacity: activeProject ? 1 : 0,
           scale: activeProject ? 1 : 0.88,
@@ -153,7 +154,7 @@ export default function Projects() {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.6, ease: "easeOut" as const }}
         className="flex flex-wrap gap-x-4 px-4 mr-auto sm:gap-x-6 sm:mx-auto sm:mb-14"
       >
         <UpdatedHeading fontName="retail" tracking delay={0.1}>
