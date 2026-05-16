@@ -4,7 +4,7 @@ import UpdatedHeading from "../ui/UpdatedHeading";
 
 function UpdatedSkill() {
   return (
-    <div className="bg-[#EFEFEF] h-full px-4 py-14 flex items-center justify-center xl:h-screen">
+    <div className="bg-[#EFEFEF] h-full px-4 py-14 flex items-center justify-center md:h-screen">
       <div className="max-w-280 flex flex-col gap-4 sm:gap-10">
         <div className="flex flex-wrap gap-x-4 mr-auto sm:gap-x-6">
           <UpdatedHeading fontName="retail" tracking delay={0.1}>

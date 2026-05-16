@@ -34,7 +34,7 @@ export default function Button({
       }}
       animate={{ opacity: 1, x: 0 }}
       transition={{
-        duration: 1.5,
+        duration: 1.75,
         delay: isMobile ? 1.5 : 2.25,
         ease: [0.16, 1, 0.3, 1],
         scale: { type: "spring", stiffness: 300, damping: 20 },
