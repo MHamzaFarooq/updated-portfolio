@@ -5,6 +5,7 @@ import { useState, useRef, useLayoutEffect } from "react";
 import Image from "next/image";
 import UpdatedHeading from "../ui/UpdatedHeading";
 import useMobile from "../hooks/useMobile";
+
 const projects = [
   {
     id: "01",
@@ -32,13 +33,22 @@ const projects = [
   },
 ];
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
 const projectVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: (i: number) => ({
+  visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, delay: i * 0.1 },
-  }),
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
 };
 
 export default function Projects() {
@@ -51,8 +61,7 @@ export default function Projects() {
   const isMobile = useMobile();
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = containerRef.current!.getBoundingClientRect();
-    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    setMousePos({ x: e.clientX, y: e.clientY });
   };
 
   const handleMouseEnter = (project: (typeof projects)[0]) => {
@@ -77,26 +86,26 @@ export default function Projects() {
       className="relative min-h-screen flex flex-col justify-center py-20"
       onMouseMove={handleMouseMove}
     >
-      {/* Floating preview — always mounted, fades between images */}
+      {/* Floating preview */}
       <motion.div
-        className="absolute z-50 pointer-events-none rounded-xl overflow-hidden shadow-2xl"
+        className="fixed z-50 pointer-events-none rounded-xl overflow-hidden shadow-2xl"
         animate={{
           opacity: activeProject ? 1 : 0,
           scale: activeProject ? 1 : 0.88,
-          left: mousePos.x,
-          top: mousePos.y,
+          x: mousePos.x - 160,
+          y: mousePos.y - 120,
         }}
         transition={{
           opacity: { duration: 0.3, ease: "easeInOut" },
           scale: { type: "spring", stiffness: 300, damping: 25 },
-          left: { type: "spring", stiffness: 150, damping: 20 },
-          top: { type: "spring", stiffness: 150, damping: 20 },
+          x: { type: "spring", stiffness: 150, damping: 20 },
+          y: { type: "spring", stiffness: 150, damping: 20 },
         }}
         style={{
-          translateX: "-50%",
-          translateY: "-60%",
           width: 320,
           height: 200,
+          top: 0,
+          left: 0,
         }}
       >
         {/* Previous image fades out */}
@@ -139,7 +148,14 @@ export default function Projects() {
         </motion.div>
       </motion.div>
 
-      <div className="flex flex-wrap gap-x-4 px-4 mr-auto sm:gap-x-6 sm:mx-auto sm:mb-14">
+      {/* Heading */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="flex flex-wrap gap-x-4 px-4 mr-auto sm:gap-x-6 sm:mx-auto sm:mb-14"
+      >
         <UpdatedHeading fontName="retail" tracking delay={0.1}>
           Things
         </UpdatedHeading>
@@ -158,38 +174,42 @@ export default function Projects() {
         <UpdatedHeading fontName="swear" delay={0.3}>
           shipped
         </UpdatedHeading>
-      </div>
+      </motion.div>
 
-      {projects.map((project, i) => (
-        <motion.div
-          variants={projectVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          custom={i}
-          key={project.id}
-          className="h-40.75 px-4 flex items-center border-b"
-        >
-          <div
-            onMouseEnter={() => !isMobile && handleMouseEnter(project)}
-            onMouseLeave={() => !isMobile && handleMouseLeave()}
-            onClick={() => handleClick(project.link)}
-            className="max-w-280 flex mx-auto h-full items-center justify-between w-full hover:max-w-270 hover:opacity-40 hover:cursor-pointer transition-all duration-300"
+      {/* Projects */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        {projects.map((project) => (
+          <motion.div
+            variants={projectVariants}
+            key={project.id}
+            className="h-40.75 px-4 flex items-center border-b"
           >
-            <div className="flex items-center gap-3 sm:gap-9.25">
-              <span className="font-swear w-23.75 sm:w-29 text-[87px] sm:text-[102px] tracking-[-4%] leading-[97%]">
-                {project.id}
-              </span>
-              <span className="font-retail text-2xl sm:text-[32px] tracking-[-4%] leading-[97%]">
-                {project.name}
+            <div
+              onMouseEnter={() => !isMobile && handleMouseEnter(project)}
+              onMouseLeave={() => !isMobile && handleMouseLeave()}
+              onClick={() => handleClick(project.link)}
+              className="max-w-280 flex mx-auto h-full items-center justify-between w-full hover:max-w-270 hover:opacity-40 hover:cursor-pointer transition-all duration-300"
+            >
+              <div className="flex items-center gap-3 sm:gap-9.25">
+                <span className="font-swear w-23.75 sm:w-29 text-[87px] sm:text-[102px] tracking-[-4%] leading-[97%]">
+                  {project.id}
+                </span>
+                <span className="font-retail text-2xl sm:text-[32px] tracking-[-4%] leading-[97%]">
+                  {project.name}
+                </span>
+              </div>
+              <span className="font-swear text-[54px] sm:text-[61px] tracking-[-4%] leading-[97%]">
+                →
               </span>
             </div>
-            <span className="font-swear text-[54px] sm:text-[61px] tracking-[-4%] leading-[97%]">
-              →
-            </span>
-          </div>
-        </motion.div>
-      ))}
+          </motion.div>
+        ))}
+      </motion.div>
     </div>
   );
 }
