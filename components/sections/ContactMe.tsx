@@ -4,9 +4,9 @@ import { motion, scale } from "framer-motion";
 
 function ContactMe() {
   const links = [
-    { label: "Email", href: "mailto:hamza@example.com" },
-    { label: "Whatsapp", href: "https://wa.me/923001234567" },
-    { label: "LinkedIn", href: "https://linkedin.com/in/yourhandle" },
+    { label: "Email", href: "mailto:hamzafarooq49ml@gmail.com" },
+    { label: "Whatsapp", href: "https://wa.me/923051840007" },
+    { label: "LinkedIn", href: "https://linkedin.com/in/mhamzafarooq" },
   ];
   return (
     <div className="w-full sm:py-34.75 flex flex-col sm:flex-row justify-center items-center px-4 h-screen sm:h-full bg-black">
