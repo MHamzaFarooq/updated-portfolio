@@ -15,7 +15,7 @@ function UpdatedHeading({
 }) {
   const pr = fontName === "retail" ? "pr-2" : "";
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden inline-block">
       <motion.h1
         initial={{ y: "100%" }}
         whileInView={{ y: "0%" }}

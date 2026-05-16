@@ -29,7 +29,7 @@ const projects = [
     id: "04",
     name: "Syncode",
     image: "/images/syncode.png",
-    link: "https://github.com/MHamzaFarooq/Syncode",
+    link: "https://syncode-nu.vercel.app/",
   },
 ];
 
@@ -225,19 +225,19 @@ export default function Projects() {
         <UpdatedHeading fontName="retail" tracking delay={0.1}>
           Things
         </UpdatedHeading>
-        <UpdatedHeading fontName="retail" tracking delay={0.1}>
+        <UpdatedHeading fontName="retail" tracking delay={0.2}>
           I
         </UpdatedHeading>
-        <UpdatedHeading fontName="retail" tracking delay={0.1}>
+        <UpdatedHeading fontName="retail" tracking delay={0.3}>
           have
         </UpdatedHeading>
-        <UpdatedHeading fontName="retail" tracking delay={0.1}>
+        <UpdatedHeading fontName="retail" tracking delay={0.4}>
           built
         </UpdatedHeading>
-        <UpdatedHeading fontName="swear" delay={0.2}>
+        <UpdatedHeading fontName="swear" delay={0.5}>
           and
         </UpdatedHeading>
-        <UpdatedHeading fontName="swear" delay={0.3}>
+        <UpdatedHeading fontName="swear" delay={0.6}>
           shipped
         </UpdatedHeading>
       </motion.div>
