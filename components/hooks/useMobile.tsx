@@ -1,15 +1,18 @@
-import { useState, useLayoutEffect } from "react";
+// hooks/useMobile.ts
+import { useState, useEffect } from "react";
 
 export default function useMobile() {
-  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(max-width: 639px)").matches; // ✅ initial value set lazily
+  });
 
-  useLayoutEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 640);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 639px)");
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
   }, []);
 
-  if (isMobile === null) return null;
   return isMobile;
 }
