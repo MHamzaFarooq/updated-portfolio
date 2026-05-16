@@ -4,6 +4,9 @@ import HeroTitle from "../ui/HeroTitle";
 import { motion } from "framer-motion";
 
 function UpdatedHero() {
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     // <div className="h-screen flex items-center overflow-x-hidden">
     //   <section className="flex flex-wrap gap-x-6 px-4 justify-center text-center mx-auto items-center max-w-99.5 sm:max-w-172.5 md:max-w-280">
@@ -67,7 +70,9 @@ function UpdatedHero() {
         </HeroTitle>
       </section>
       <div className="flex flex-col w-full gap-3 sm:flex-row sm:items-center sm:max-w-90 sm:gap-0">
-        <Button variant="filled">See My Work</Button>
+        <div onClick={() => scrollToSection("projects")}>
+          <Button variant="filled">See My Work</Button>
+        </div>
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
@@ -75,7 +80,9 @@ function UpdatedHero() {
           style={{ transformOrigin: "center" }}
           className="hidden h-px bg-black sm:block sm:w-full"
         />
-        <Button variant="outline">Talk to Me</Button>
+        <div onClick={() => scrollToSection("contact")}>
+          <Button variant="outline">Talk to Me</Button>
+        </div>
       </div>
     </div>
   );

@@ -6,11 +6,21 @@ import ContactMe from "@/components/sections/ContactMe";
 export default function Home() {
   return (
     <>
-      <UpdatedHero />
-      <UpdatedSkill />
-      <Projects />
-      <About />
-      <ContactMe />
+      <div id="hero">
+        <UpdatedHero />
+      </div>
+      <div id="skills">
+        <UpdatedSkill />
+      </div>
+      <div id="projects">
+        <Projects />
+      </div>
+      <div id="about">
+        <About />
+      </div>
+      <div id="contact">
+        <ContactMe />
+      </div>
     </>
   );
 }

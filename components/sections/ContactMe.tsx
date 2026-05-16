@@ -1,6 +1,6 @@
 "use client";
 import UpdatedHeading from "../ui/UpdatedHeading";
-import { motion, scale } from "framer-motion";
+import { motion } from "framer-motion";
 
 function ContactMe() {
   const links = [
@@ -13,7 +13,7 @@ function ContactMe() {
       <div className="max-w-280">
         <div className="max-w-280 flex flex-col sm:justify-start w-fit py-14 text-white">
           <UpdatedHeading fontName="retail" tracking delay={0.1}>
-            let's create something
+            let&apos;s create something
           </UpdatedHeading>
           <UpdatedHeading fontName="swear" delay={0.2}>
             together
