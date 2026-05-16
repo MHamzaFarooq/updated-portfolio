@@ -74,7 +74,7 @@ export default function Projects() {
   return (
     <div
       ref={containerRef}
-      className="relative min-h-screen flex px-4 flex-col justify-center py-20 gap-10"
+      className="relative min-h-screen flex flex-col justify-center py-20"
       onMouseMove={handleMouseMove}
     >
       {/* Floating preview — always mounted, fades between images */}
@@ -139,7 +139,7 @@ export default function Projects() {
         </motion.div>
       </motion.div>
 
-      <div className="flex flex-wrap gap-x-4 mr-auto sm:gap-x-6 sm:mx-auto">
+      <div className="flex flex-wrap gap-x-4 px-4 mr-auto sm:gap-x-6 sm:mx-auto sm:mb-14">
         <UpdatedHeading fontName="retail" tracking delay={0.1}>
           Things
         </UpdatedHeading>
@@ -168,7 +168,7 @@ export default function Projects() {
           viewport={{ once: true, amount: 0.3 }}
           custom={i}
           key={project.id}
-          className="h-40.75 flex items-center border-b"
+          className="h-40.75 px-4 flex items-center border-b"
         >
           <div
             onMouseEnter={() => !isMobile && handleMouseEnter(project)}
@@ -176,15 +176,15 @@ export default function Projects() {
             onClick={() => handleClick(project.link)}
             className="max-w-280 flex mx-auto h-full items-center justify-between w-full hover:max-w-270 hover:opacity-40 hover:cursor-pointer transition-all duration-300"
           >
-            <div className="flex items-center gap-9.25">
-              <span className="font-swear w-29 text-[102px] tracking-[-4%] leading-[97%]">
+            <div className="flex items-center gap-3 sm:gap-9.25">
+              <span className="font-swear w-23.75 sm:w-29 text-[87px] sm:text-[102px] tracking-[-4%] leading-[97%]">
                 {project.id}
               </span>
-              <span className="font-retail text-[32px] tracking-[-4%] leading-[97%]">
+              <span className="font-retail text-2xl sm:text-[32px] tracking-[-4%] leading-[97%]">
                 {project.name}
               </span>
             </div>
-            <span className="font-swear text-[61px] tracking-[-4%] leading-[97%]">
+            <span className="font-swear text-[54px] sm:text-[61px] tracking-[-4%] leading-[97%]">
               →
             </span>
           </div>
