@@ -1,11 +1,10 @@
 "use client";
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { motion, Variants } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import UpdatedHeading from "../ui/UpdatedHeading";
 import useMobile from "../hooks/useMobile";
-import useMouse from "../hooks/useMouse";
-import { Variants } from "framer-motion";
+import gsap from "gsap";
 
 const projects = [
   {
@@ -34,12 +33,26 @@ const projects = [
   },
 ];
 
+const scaleAnimation: Variants = {
+  initial: { scale: 0, x: "-50%", y: "-50%" },
+  enter: {
+    scale: 1,
+    x: "-50%",
+    y: "-50%",
+    transition: { duration: 0.4, ease: [0.76, 0, 0.24, 1] as const },
+  },
+  closed: {
+    scale: 0,
+    x: "-50%",
+    y: "-50%",
+    transition: { duration: 0.4, ease: [0.32, 0, 0.67, 0] as const },
+  },
+};
+
 const containerVariants: Variants = {
   hidden: {},
   visible: {
-    transition: {
-      staggerChildren: 0.15,
-    },
+    transition: { staggerChildren: 0.15 },
   },
 };
 
@@ -53,24 +66,54 @@ const projectVariants: Variants = {
 };
 
 export default function Projects() {
-  const [activeProject, setActiveProject] = useState<string | null>(null);
-  const [currentImage, setCurrentImage] = useState<string>(projects[0].image);
-  const [prevImage, setPrevImage] = useState<string | null>(null);
-
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const isMobile = useMobile();
-  const mousePos = useMouse();
 
-  const handleMouseEnter = (project: (typeof projects)[0]) => {
-    setActiveProject(project.id);
-    if (project.image !== currentImage) {
-      setPrevImage(currentImage);
-      setCurrentImage(project.image);
-    }
-  };
+  const modalContainer = useRef<HTMLDivElement>(null);
+  const cursor = useRef<HTMLDivElement>(null);
+  const cursorLabel = useRef<HTMLDivElement>(null);
 
-  const handleMouseLeave = () => {
-    setActiveProject(null);
-  };
+  useEffect(() => {
+    if (isMobile !== false) return;
+
+    const xMoveContainer = gsap.quickTo(modalContainer.current, "left", {
+      duration: 0.8,
+      ease: "power3",
+    });
+    const yMoveContainer = gsap.quickTo(modalContainer.current, "top", {
+      duration: 0.8,
+      ease: "power3",
+    });
+    const xMoveCursor = gsap.quickTo(cursor.current, "left", {
+      duration: 0.5,
+      ease: "power3",
+    });
+    const yMoveCursor = gsap.quickTo(cursor.current, "top", {
+      duration: 0.5,
+      ease: "power3",
+    });
+    const xMoveCursorLabel = gsap.quickTo(cursorLabel.current, "left", {
+      duration: 0.45,
+      ease: "power3",
+    });
+    const yMoveCursorLabel = gsap.quickTo(cursorLabel.current, "top", {
+      duration: 0.45,
+      ease: "power3",
+    });
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      xMoveContainer(clientX);
+      yMoveContainer(clientY);
+      xMoveCursor(clientX);
+      yMoveCursor(clientY);
+      xMoveCursorLabel(clientX);
+      yMoveCursorLabel(clientY);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [isMobile]);
 
   const handleClick = (link: string) => {
     window.open(link, "_blank");
@@ -78,63 +121,97 @@ export default function Projects() {
 
   return (
     <div className="relative min-h-screen flex flex-col justify-center py-20">
-      {/* Floating preview — desktop only */}
-      {!isMobile && (
-        <motion.div
-          className="fixed z-50 pointer-events-none rounded-xl overflow-hidden shadow-2xl"
-          initial={{ opacity: 0, scale: 0.88 }}
-          animate={{
-            opacity: activeProject ? 1 : 0,
-            scale: activeProject ? 1 : 0.88,
-            x: mousePos.x - 160,
-            y: mousePos.y - 120,
-          }}
-          transition={{
-            opacity: { duration: 0.3, ease: "easeInOut" },
-            scale: { type: "spring", stiffness: 300, damping: 25 },
-            x: { type: "spring", stiffness: 150, damping: 20 },
-            y: { type: "spring", stiffness: 150, damping: 20 },
-          }}
-          style={{ width: 320, height: 200, top: 0, left: 0 }}
-        >
-          {prevImage && (
-            <motion.div
-              key={prevImage}
-              className="absolute inset-0"
-              initial={{ opacity: 1 }}
-              animate={{ opacity: 0 }}
-              transition={{ duration: 0.4, ease: "easeInOut" as const }}
-              onAnimationComplete={() => setPrevImage(null)}
-            >
-              <Image
-                src={prevImage}
-                alt=""
-                fill
-                sizes="320px"
-                loading="eager"
-                className="object-cover"
-              />
-            </motion.div>
-          )}
-
-          {/* Current image fades in */}
+      {isMobile === false && (
+        <>
+          {/* Modal image container */}
           <motion.div
-            key={currentImage}
-            className="absolute inset-0"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, ease: "easeInOut" as const }}
+            ref={modalContainer}
+            variants={scaleAnimation}
+            initial="initial"
+            animate={activeIndex !== null ? "enter" : "closed"}
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: 320,
+              height: 200,
+              overflow: "hidden",
+              borderRadius: "12px",
+              pointerEvents: "none",
+              zIndex: 50,
+            }}
           >
-            <Image
-              src={currentImage}
-              alt=""
-              fill
-              sizes="320px"
-              loading="eager"
-              className="object-cover"
-            />
+            <div
+              style={{
+                position: "absolute",
+                width: "100%",
+                top: `${(activeIndex ?? 0) * -100}%`,
+                transition: "top 0.4s cubic-bezier(0.76, 0, 0.24, 1)",
+              }}
+            >
+              {projects.map((project) => (
+                <div
+                  key={project.id}
+                  style={{ position: "relative", width: "100%", height: 200 }}
+                >
+                  <Image
+                    src={project.image}
+                    alt={project.name}
+                    fill
+                    sizes="320px"
+                    loading="eager"
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </div>
           </motion.div>
-        </motion.div>
+
+          {/* Cursor dot */}
+          <motion.div
+            ref={cursor}
+            variants={scaleAnimation}
+            initial="initial"
+            animate={activeIndex !== null ? "enter" : "closed"}
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: 80,
+              height: 80,
+              borderRadius: "50%",
+              backgroundColor: "white",
+              pointerEvents: "none",
+              zIndex: 51,
+            }}
+          />
+
+          {/* Cursor label */}
+          <motion.div
+            ref={cursorLabel}
+            variants={scaleAnimation}
+            initial="initial"
+            animate={activeIndex !== null ? "enter" : "closed"}
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: 80,
+              height: 80,
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "black",
+              fontSize: "16px",
+              fontFamily: "var(--font-retail)",
+              pointerEvents: "none",
+              zIndex: 52,
+            }}
+          >
+            View
+          </motion.div>
+        </>
       )}
 
       {/* Heading */}
@@ -172,15 +249,15 @@ export default function Projects() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        {projects.map((project) => (
+        {projects.map((project, i) => (
           <motion.div
             variants={projectVariants}
             key={project.id}
             className="h-40.75 px-4 flex items-center border-b"
           >
             <div
-              onMouseEnter={() => !isMobile && handleMouseEnter(project)}
-              onMouseLeave={() => !isMobile && handleMouseLeave()}
+              onMouseEnter={() => isMobile === false && setActiveIndex(i)}
+              onMouseLeave={() => isMobile === false && setActiveIndex(null)}
               onClick={() => handleClick(project.link)}
               className="max-w-280 flex mx-auto h-full items-center justify-between w-full hover:max-w-270 hover:opacity-40 hover:cursor-pointer transition-all duration-300"
             >
