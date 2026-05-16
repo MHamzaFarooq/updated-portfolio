@@ -1,10 +1,10 @@
 "use client";
-import Heading from "../ui/Heading";
 import { motion } from "framer-motion";
-import { useState, useRef, useLayoutEffect } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import UpdatedHeading from "../ui/UpdatedHeading";
 import useMobile from "../hooks/useMobile";
+import { Variants } from "framer-motion";
 
 const projects = [
   {
@@ -33,7 +33,7 @@ const projects = [
   },
 ];
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
@@ -42,12 +42,12 @@ const containerVariants = {
   },
 };
 
-const projectVariants = {
+const projectVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
+    transition: { duration: 0.5, ease: "easeOut" as const },
   },
 };
 
