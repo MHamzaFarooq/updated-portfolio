@@ -1,9 +1,10 @@
 "use client";
 import { motion } from "framer-motion";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import UpdatedHeading from "../ui/UpdatedHeading";
 import useMobile from "../hooks/useMobile";
+import useMouse from "../hooks/useMouse";
 import { Variants } from "framer-motion";
 
 const projects = [
@@ -55,14 +56,9 @@ export default function Projects() {
   const [activeProject, setActiveProject] = useState<string | null>(null);
   const [currentImage, setCurrentImage] = useState<string>(projects[0].image);
   const [prevImage, setPrevImage] = useState<string | null>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const containerRef = useRef<HTMLDivElement>(null);
 
   const isMobile = useMobile();
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    setMousePos({ x: e.clientX, y: e.clientY });
-  };
+  const mousePos = useMouse();
 
   const handleMouseEnter = (project: (typeof projects)[0]) => {
     setActiveProject(project.id);
@@ -81,73 +77,65 @@ export default function Projects() {
   };
 
   return (
-    <div
-      ref={containerRef}
-      className="relative min-h-screen flex flex-col justify-center py-20"
-      onMouseMove={handleMouseMove}
-    >
-      {/* Floating preview */}
-      <motion.div
-        className="fixed z-50 pointer-events-none rounded-xl overflow-hidden shadow-2xl"
-        initial={{ opacity: 0, scale: 0.88 }} // ✅ start hidden
-        animate={{
-          opacity: activeProject ? 1 : 0,
-          scale: activeProject ? 1 : 0.88,
-          x: mousePos.x - 160,
-          y: mousePos.y - 120,
-        }}
-        transition={{
-          opacity: { duration: 0.3, ease: "easeInOut" },
-          scale: { type: "spring", stiffness: 300, damping: 25 },
-          x: { type: "spring", stiffness: 150, damping: 20 },
-          y: { type: "spring", stiffness: 150, damping: 20 },
-        }}
-        style={{
-          width: 320,
-          height: 200,
-          top: 0,
-          left: 0,
-        }}
-      >
-        {/* Previous image fades out */}
-        {prevImage && (
+    <div className="relative min-h-screen flex flex-col justify-center py-20">
+      {/* Floating preview — desktop only */}
+      {!isMobile && (
+        <motion.div
+          className="fixed z-50 pointer-events-none rounded-xl overflow-hidden shadow-2xl"
+          initial={{ opacity: 0, scale: 0.88 }}
+          animate={{
+            opacity: activeProject ? 1 : 0,
+            scale: activeProject ? 1 : 0.88,
+            x: mousePos.x - 160,
+            y: mousePos.y - 120,
+          }}
+          transition={{
+            opacity: { duration: 0.3, ease: "easeInOut" },
+            scale: { type: "spring", stiffness: 300, damping: 25 },
+            x: { type: "spring", stiffness: 150, damping: 20 },
+            y: { type: "spring", stiffness: 150, damping: 20 },
+          }}
+          style={{ width: 320, height: 200, top: 0, left: 0 }}
+        >
+          {prevImage && (
+            <motion.div
+              key={prevImage}
+              className="absolute inset-0"
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 0 }}
+              transition={{ duration: 0.4, ease: "easeInOut" as const }}
+              onAnimationComplete={() => setPrevImage(null)}
+            >
+              <Image
+                src={prevImage}
+                alt=""
+                fill
+                sizes="320px"
+                loading="eager"
+                className="object-cover"
+              />
+            </motion.div>
+          )}
+
+          {/* Current image fades in */}
           <motion.div
-            key={prevImage}
+            key={currentImage}
             className="absolute inset-0"
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 0 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-            onAnimationComplete={() => setPrevImage(null)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, ease: "easeInOut" as const }}
           >
             <Image
-              src={prevImage}
+              src={currentImage}
               alt=""
+              fill
               sizes="320px"
               loading="eager"
-              fill
               className="object-cover"
             />
           </motion.div>
-        )}
-
-        {/* Current image fades in */}
-        <motion.div
-          key={currentImage}
-          className="absolute inset-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
-        >
-          <Image
-            src={currentImage}
-            alt=""
-            sizes="320px"
-            loading="eager"
-            fill
-            className="object-cover"
-          />
         </motion.div>
-      </motion.div>
+      )}
 
       {/* Heading */}
       <motion.div
