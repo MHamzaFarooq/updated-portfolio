@@ -57,7 +57,7 @@ function About() {
               out different restaurants, spend time with family and friends, and
               I am a #1 fan of chai. In simple terms, I am easy to work with.
             </motion.p>
-            <a href="/CV/hamza_general_CV.pdf" download className="w-fit">
+            <a href="/CV/hamza_SWE_cv.pdf" download className="w-fit">
               <Button variant="outline">Download my CV</Button>
             </a>
           </div>
