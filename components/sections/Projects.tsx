@@ -9,27 +9,38 @@ import gsap from "gsap";
 const projects = [
   {
     id: "01",
-    name: "VoiceDrop.ai",
-    image: "/images/voicedrop.png",
-    link: "https://voicedrop.ai",
+    name: "Sendrite",
+    role: "Fullstack Developer",
+    image: "/images/sendrite.png",
+    link: "https://sendrite.netlify.app/",
   },
   {
     id: "02",
+    name: "Syncode",
+    role: "Frontend Developer",
+    image: "/images/syncode.png",
+    link: "https://syncode-nu.vercel.app/",
+  },
+  {
+    id: "03",
+    name: "Voicedrop",
+    role: "Product Designer",
+    image: "/images/voicedrop.png",
+    link: "https://www.voicedrop.ai/",
+  },
+  {
+    id: "04",
     name: "1Capture.io",
+    role: "Product Designer",
     image: "/images/1capture.png",
     link: "https://1capture.io",
   },
   {
-    id: "03",
+    id: "05",
     name: "1Lookup.io",
+    role: "Product Designer",
     image: "/images/1lookup.png",
     link: "https://1lookup.io",
-  },
-  {
-    id: "04",
-    name: "Syncode",
-    image: "/images/syncode.png",
-    link: "https://syncode-nu.vercel.app/",
   },
 ];
 
@@ -265,9 +276,14 @@ export default function Projects() {
                 <span className="font-swear w-23.75 sm:w-29 text-[87px] sm:text-[102px] tracking-[-4%] leading-[97%]">
                   {project.id}
                 </span>
-                <span className="font-retail text-2xl sm:text-[32px] tracking-[-4%] leading-[97%]">
-                  {project.name}
-                </span>
+                <div className="flex flex-col gap-1 sm:gap-2">
+                  <span className="font-retail text-2xl sm:text-[32px] tracking-[-4%] leading-[97%]">
+                    {project.name}
+                  </span>
+                  <span className="font-retail opacity-80 text-[18px] sm:text-[18px] tracking-[-4%] leading-[97%]">
+                    {project.role}
+                  </span>
+                </div>
               </div>
               <span className="font-swear text-[54px] sm:text-[61px] tracking-[-4%] leading-[97%]">
                 →
