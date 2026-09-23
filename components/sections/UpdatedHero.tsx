@@ -57,10 +57,10 @@ function UpdatedHero() {
           product
         </HeroTitle>
         <HeroTitle fontName="retail" tracking={true} delay={0.5}>
-          designer
+          minded
         </HeroTitle>
         <HeroTitle fontName="swear" delay={0.6}>
-          turned
+          full-stack
         </HeroTitle>
         <HeroTitle fontName="swear" delay={0.7}>
           software

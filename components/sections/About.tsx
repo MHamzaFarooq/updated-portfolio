@@ -51,11 +51,12 @@ function About() {
               }}
               className="font-retail text-[16px]"
             >
-              My name is Hamza Farooq. I am a designer turned coder, builder,
-              and developer with 2+ years of professional experience in product
-              design and full-stack development. In my free time, I like to try
-              out different restaurants, spend time with family and friends, and
-              I am a #1 fan of chai. In simple terms, I am easy to work with.
+              My name is Hamza Farooq. I am a coder, builder, developer and
+              designer with 2+ years of professional experience in full-stack
+              software development and product design. In my free time, I like
+              to try out different restaurants, spend quality time with family
+              and friends, and enjoy my chai. In simple terms, I am easy to work
+              with.
             </motion.p>
             <a
               href="/CV/Hamza-Software_Engineer.pdf"
