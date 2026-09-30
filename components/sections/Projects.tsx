@@ -17,7 +17,7 @@ const projects = [
   {
     id: "02",
     name: "myKhata",
-    role: "Fullstack Developer",
+    role: "Fullstack Engineer",
     image: "/images/mykhata.png",
     link: "https://mykhata-three.vercel.app/",
   },
@@ -34,20 +34,6 @@ const projects = [
     role: "Product Design Engineer",
     image: "/images/voicedrop.png",
     link: "https://www.voicedrop.ai/",
-  },
-  {
-    id: "05",
-    name: "1Capture.io",
-    role: "UI/UX Designer",
-    image: "/images/1capture.png",
-    link: "https://1capture.io",
-  },
-  {
-    id: "06",
-    name: "1Lookup.io",
-    role: "UI/UX Designer",
-    image: "/images/1lookup.png",
-    link: "https://1lookup.io",
   },
 ];
 
