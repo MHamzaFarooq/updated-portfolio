@@ -15,10 +15,15 @@ function UpdatedHeading({
 }) {
   const pr = fontName === "retail" ? "pr-2" : "";
   return (
-    <div className="overflow-hidden inline-block">
+    // Observe the wrapper, not the h1: the h1 starts fully clipped, and mobile
+    // Safari never reports a fully clipped element as in view.
+    <motion.div
+      className="overflow-hidden inline-block"
+      initial="hidden"
+      whileInView="visible"
+    >
       <motion.h1
-        initial={{ y: "100%" }}
-        whileInView={{ y: "0%" }}
+        variants={{ hidden: { y: "100%" }, visible: { y: "0%" } }}
         transition={{
           duration: 1,
           delay: delay * 1.2,
@@ -28,7 +33,7 @@ function UpdatedHeading({
       >
         {children}
       </motion.h1>
-    </div>
+    </motion.div>
   );
 }
 
