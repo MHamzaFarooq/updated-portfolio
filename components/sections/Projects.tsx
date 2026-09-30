@@ -224,7 +224,7 @@ export default function Projects() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.6, ease: "easeOut" as const }}
-        className="flex flex-wrap gap-x-4 px-4 mr-auto sm:gap-x-6 sm:mx-auto sm:mb-14"
+        className="flex flex-wrap max-w-full gap-x-4 px-4 mr-auto sm:gap-x-6 sm:mx-auto sm:mb-14"
       >
         <UpdatedHeading fontName="retail" tracking delay={0.1}>
           Things
