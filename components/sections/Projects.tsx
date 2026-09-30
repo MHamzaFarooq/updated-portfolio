@@ -235,12 +235,6 @@ export default function Projects() {
         <UpdatedHeading fontName="retail" tracking delay={0.3}>
           have
         </UpdatedHeading>
-        <UpdatedHeading fontName="retail" tracking delay={0.4}>
-          built
-        </UpdatedHeading>
-        <UpdatedHeading fontName="swear" delay={0.5}>
-          and
-        </UpdatedHeading>
         <UpdatedHeading fontName="swear" delay={0.6}>
           shipped
         </UpdatedHeading>
