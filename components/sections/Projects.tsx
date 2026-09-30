@@ -222,7 +222,7 @@ export default function Projects() {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.5 }}
+        viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6, ease: "easeOut" as const }}
         className="flex flex-wrap max-w-full gap-x-4 px-4 mr-auto sm:gap-x-6 sm:mx-auto sm:mb-14"
       >
